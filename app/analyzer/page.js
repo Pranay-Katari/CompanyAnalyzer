@@ -23,21 +23,36 @@ const SP500 = [
   { symbol: "META", name: "Meta Platforms, Inc.", sector: "Communication Services" },
   { symbol: "TSLA", name: "Tesla, Inc.", sector: "Consumer Discretionary" },
   { symbol: "V", name: "Visa Inc.", sector: "Information Technology" },
+  { symbol: "MA", name: "Mastercard Incorporated", sector: "Information Technology" },
   { symbol: "JPM", name: "JPMorgan Chase & Co.", sector: "Financials" },
+  { symbol: "BAC", name: "Bank of America Corporation", sector: "Financials" },
+  { symbol: "C", name: "Citigroup Inc.", sector: "Financials" },
+  { symbol: "WFC", name: "Wells Fargo & Company", sector: "Financials" },
   { symbol: "WMT", name: "Walmart Inc.", sector: "Consumer Staples" },
   { symbol: "PG", name: "Procter & Gamble Company", sector: "Consumer Staples" },
-  { symbol: "MA", name: "Mastercard Incorporated", sector: "Information Technology" },
+  { symbol: "KO", name: "The Coca-Cola Company", sector: "Consumer Staples" },
+  { symbol: "PEP", name: "PepsiCo, Inc.", sector: "Consumer Staples" },
+  { symbol: "MCD", name: "McDonald's Corporation", sector: "Consumer Discretionary" },
+  { symbol: "NKE", name: "Nike, Inc.", sector: "Consumer Discretionary" },
   { symbol: "HD", name: "The Home Depot, Inc.", sector: "Consumer Discretionary" },
-  { symbol: "XOM", name: "Exxon Mobil Corporation", sector: "Energy" },
-  { symbol: "CVX", name: "Chevron Corporation", sector: "Energy" },
   { symbol: "UNH", name: "UnitedHealth Group Incorporated", sector: "Health Care" },
   { symbol: "JNJ", name: "Johnson & Johnson", sector: "Health Care" },
-  { symbol: "BRK.B", name: "Berkshire Hathaway Inc. (Class B)", sector: "Financials" },
-  { symbol: "ZTS", name: "Zoetis Inc.", sector: "Health Care" }
+  { symbol: "PFE", name: "Pfizer Inc.", sector: "Health Care" },
+  { symbol: "MRK", name: "Merck & Co., Inc.", sector: "Health Care" },
+  { symbol: "ABBV", name: "AbbVie Inc.", sector: "Health Care" },
+  { symbol: "ZTS", name: "Zoetis Inc.", sector: "Health Care" },
+  { symbol: "XOM", name: "Exxon Mobil Corporation", sector: "Energy" },
+  { symbol: "CVX", name: "Chevron Corporation", sector: "Energy" },
+  { symbol: "COP", name: "ConocoPhillips", sector: "Energy" },
+  { symbol: "BA", name: "The Boeing Company", sector: "Industrials" },
+  { symbol: "CAT", name: "Caterpillar Inc.", sector: "Industrials" },
+  { symbol: "UPS", name: "United Parcel Service, Inc.", sector: "Industrials" },
+  { symbol: "GE", name: "General Electric Company", sector: "Industrials" },
 ];
 
+
 async function getCompanyData(companyName) {
-  const res = await fetch("http://localhost:8000/company-data", {
+  const res = await fetch("https://flask-api-305063258048.northamerica-northeast1.run.app/company-data", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ company_name: companyName })
@@ -52,27 +67,42 @@ async function getCompanyData(companyName) {
 }
 
 const BRAND = {
-  AAPL: ["#000000", "#A2AAAD"],
-  MSFT: ["#00A4EF", "#7FBA00"],
-  AMZN: ["#111111", "#FF9900"],
-  NVDA: ["#000000", "#76B900"],
-  GOOGL: ["#4285F4", "#34A853"],
+  AAPL: ["#000000", "#A2AAAD"],        // Apple
+  MSFT: ["#00A4EF", "#7FBA00"],        // Microsoft
+  AMZN: ["#111111", "#FF9900"],        // Amazon
+  NVDA: ["#000000", "#76B900"],        // Nvidia
+  GOOGL: ["#4285F4", "#34A853"],       // Google
   GOOG: ["#4285F4", "#34A853"],
-  META: ["#0866FF", "#00C6FF"],
-  TSLA: ["#171A20", "#CC0000"],
-  V: ["#1A1F71", "#F7B600"],
-  JPM: ["#5A5A5A", "#A0A0A0"],
-  WMT: ["#0071CE", "#FFC220"],
-  PG: ["#003DA5", "#00A3E0"],
-  MA: ["#EB001B", "#F79E1B"],
-  HD: ["#F96302", "#FFB380"],
-  XOM: ["#FF1F00", "#0051A2"],
-  CVX: ["#1F6FB2", "#E6193C"],
-  UNH: ["#0056A4", "#89CFF0"],
-  JNJ: ["#D50000", "#FF6F6F"],
-  "BRK.B": ["#2E2A6A", "#6A5ACD"],
-  ZTS: ["#F26622", "#FDBB84"]
+  META: ["#0866FF", "#00C6FF"],        // Meta
+  TSLA: ["#171A20", "#CC0000"],        // Tesla
+  V: ["#1A1F71", "#F7B600"],           // Visa
+  MA: ["#EB001B", "#F79E1B"],          // Mastercard
+  JPM: ["#5A5A5A", "#A0A0A0"],         // JPMorgan
+  BAC: ["#0066CC", "#B0C4DE"],         // Bank of America
+  C: ["#003B70", "#E41E26"],           // Citigroup
+  WFC: ["#B31B1B", "#FFD700"],         // Wells Fargo
+  WMT: ["#0071CE", "#FFC220"],         // Walmart
+  PG: ["#003DA5", "#00A3E0"],          // Procter & Gamble
+  KO: ["#F40009", "#000000"],          // Coca-Cola
+  PEP: ["#005CB9", "#E03A3E"],         // Pepsi
+  MCD: ["#FFC72C", "#DA291C"],         // McDonald's
+  NKE: ["#111111", "#FF6600"],         // Nike
+  HD: ["#F96302", "#FFB380"],          // Home Depot
+  UNH: ["#0056A4", "#89CFF0"],         // UnitedHealth
+  JNJ: ["#D50000", "#FF6F6F"],         // Johnson & Johnson
+  PFE: ["#0071CE", "#70CAD1"],         // Pfizer
+  MRK: ["#009639", "#006747"],         // Merck
+  ABBV: ["#1A1A1A", "#8C1515"],        // AbbVie
+  ZTS: ["#F26622", "#FDBB84"],         // Zoetis
+  XOM: ["#FF1F00", "#0051A2"],         // Exxon
+  CVX: ["#1F6FB2", "#E6193C"],         // Chevron
+  COP: ["#E31837", "#000000"],         // ConocoPhillips
+  BA: ["#0039A6", "#999999"],          // Boeing
+  CAT: ["#FFCD00", "#000000"],         // Caterpillar
+  UPS: ["#351C15", "#FFB500"],         // UPS
+  GE: ["#0870D8", "#AAAAAA"],          // General Electric
 };
+
 
 const fallbackColors = (seed = "SPY") => {
   const s = (seed || "SPY").toUpperCase();
@@ -140,7 +170,6 @@ function Stat({ label, value }) {
   );
 }
 
-/* ---------------------------------- Page ---------------------------------- */
 export default function CompanyPage() {
   const [symbol, setSymbol] = useState("");
   const selected = useMemo(
@@ -193,13 +222,12 @@ export default function CompanyPage() {
     }));
   }, [data]);
 
-  const brand = colorsFor(selected || { symbol: "SPY" });
+  
   const chartData = useMemo(() => {
     if (!data) return [];
   
     const points = [];
   
-    // Historical closes
     if (Array.isArray(data.past_dates) && Array.isArray(data.past_closings)) {
       data.past_dates.forEach((d, i) => {
         const t = new Date(d).getTime();
@@ -210,7 +238,6 @@ export default function CompanyPage() {
       });
     }
   
-    // Forecast closes
     if (Array.isArray(data.closing_timestamps) && Array.isArray(data.future_closings)) {
       data.closing_timestamps.forEach((d, i) => {
         const t = new Date(d).getTime();
@@ -221,9 +248,9 @@ export default function CompanyPage() {
       });
     }
   
-    // Sort chronologically so the axis spans full timeline
     return points.sort((a, b) => a.x - b.x);
   }, [data]);
+  
 
   const yDomain = useMemo(() => {
     if (!chartData.length) return [0, "auto"];
@@ -375,82 +402,76 @@ export default function CompanyPage() {
               <p className="text-sm text-red-300">No closing data returned.</p>
             )}
 
-{chartData.length > 0 && (
-  <div className="h-[560px] w-full">
-    <ResponsiveContainer width="100%" height="100%">
-      <LineChart data={chartData} margin={{ top: 10, right: 20, bottom: 10, left: 0 }}>
-        <CartesianGrid stroke="rgba(255,255,255,0.08)" vertical={false} />
+            {chartData.length > 0 && (
+              <div className="h-[560px] w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={chartData} margin={{ top: 10, right: 20, bottom: 10, left: 0 }}>
+                    <CartesianGrid stroke="rgba(255,255,255,0.08)" vertical={false} />
 
-        <XAxis
-          dataKey="x"
-          type="number"
-          domain={["dataMin", "dataMax"]}
-          tick={{ fill: "#d1d5db", fontSize: 12 }}
-          tickFormatter={(ts) =>
-            new Date(ts).toLocaleDateString(undefined, { month: "short", day: "numeric" })
-          }
-        />
+                    <XAxis
+                      dataKey="x"
+                      type="number"
+                      domain={["dataMin", "dataMax"]}
+                      tick={{ fill: "#d1d5db", fontSize: 12 }}
+                      tickFormatter={(ts) =>
+                        new Date(ts).toLocaleDateString(undefined, { month: "short", day: "numeric" })
+                      }
+                    />
 
-        <YAxis
-          domain={["auto", "auto"]}
-          tick={{ fill: "#d1d5db", fontSize: 12 }}
-          tickFormatter={(v) =>
-            typeof v === "number"
-              ? v.toLocaleString(undefined, { maximumFractionDigits: 2 })
-              : v
-          }
-        />
+                    <YAxis
+                      domain={["auto", "auto"]}
+                      tick={{ fill: "#d1d5db", fontSize: 12 }}
+                      tickFormatter={(v) =>
+                        typeof v === "number"
+                          ? v.toLocaleString(undefined, { maximumFractionDigits: 2 })
+                          : v
+                      }
+                    />
 
-        <Tooltip
-          contentStyle={{ background: "#0b0b0b", border: "1px solid #33f163" }}
-          labelFormatter={(ts) =>
-            new Date(ts).toLocaleDateString(undefined, {
-              year: "numeric",
-              month: "short",
-              day: "numeric",
-            })
-          }
-          formatter={(value, name) => [
-            value?.toLocaleString(undefined, { maximumFractionDigits: 2 }),
-            name === "historyClose" ? "History" : "Forecast",
-          ]}
-        />
+                    <Tooltip
+                      contentStyle={{ background: "#0b0b0b", border: "1px solid #33f163" }}
+                      labelFormatter={(ts) =>
+                        new Date(ts).toLocaleDateString(undefined, {
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                        })
+                      }
+                      formatter={(value, name) => [
+                        value?.toLocaleString(undefined, { maximumFractionDigits: 2 }),
+                        name === "historyClose" ? "History" : "Forecast",
+                      ]}
+                    />
 
-        {/* History line */}
-        <Line
-          type="monotone"
-          dataKey="historyClose"
-          name="History"
-          stroke="#00ffff"
-          strokeWidth={2}
-          dot={false}
-        />
+                    <Line
+                      type="monotone"
+                      dataKey="historyClose"
+                      name="History"
+                      stroke="#00ffff"
+                      strokeWidth={2}
+                      dot={false}
+                    />
+                    <Line
+                      type="monotone"
+                      dataKey="forecastClose"
+                      name="Forecast"
+                      stroke="#ff00ff"
+                      strokeWidth={2}
+                      dot={false}
+                    />
 
-        {/* Forecast line */}
-        <Line
-          type="monotone"
-          dataKey="forecastClose"
-          name="Forecast"
-          stroke="#ff00ff"
-          strokeWidth={2}
-          strokeDasharray="5 3"
-          dot={false}
-        />
-
-        <Brush
-          dataKey="x"
-          height={24}
-          travellerWidth={10}
-          tickFormatter={(ts) =>
-            new Date(ts).toLocaleDateString(undefined, { month: "short", day: "numeric" })
-          }
-        />
-      </LineChart>
-    </ResponsiveContainer>
-  </div>
-)}
-
-
+                    <Brush
+                      dataKey="x"
+                      height={24}
+                      travellerWidth={10}
+                      tickFormatter={(ts) =>
+                        new Date(ts).toLocaleDateString(undefined, { month: "short", day: "numeric" })
+                      }
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+            )}
 
             {data?.closing_timestamps?.length > 0 && (
               <p className="mt-3 text-xs text-neutral-500">
@@ -469,19 +490,14 @@ export default function CompanyPage() {
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-                  {/* Existing fields */}
                   <Stat label="Open" value={fmtNum(data.fundamentals?.Today_Open)} />
                   <Stat label="High" value={fmtNum(data.fundamentals?.Today_High)} />
                   <Stat label="Low" value={fmtNum(data.fundamentals?.Today_Low)} />
                   <Stat label="Avg Vol (20d)" value={fmtInt(data.fundamentals?.Average_Volume_20d)} />
-
                   <Stat label="Last Dividend" value={fmtNum(data.fundamentals?.["Last Dividend"])} />
                   <Stat label="Last Split" value={fmtNum(data.fundamentals?.["Last Split"])} />
-
                   <Stat label="Forward P/E" value={fmtNum(data.fundamentals?.["Forward P/E"])} />
                   <Stat label="Trailing EPS" value={fmtNum(data.fundamentals?.["Trailing EPS"])} />
-
-                  {/* === New fields from backend === */}
                   <Stat label="PEG Ratio" value={fmtNum(data.fundamentals?.peg_ratio)} />
                   <Stat label="Price / Book" value={fmtNum(data.fundamentals?.price_to_book)} />
                   <Stat label="Market Cap" value={fmtInt(data.fundamentals?.market_cap)} />
