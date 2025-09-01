@@ -52,7 +52,7 @@ const SP500 = [
 
 
 async function getCompanyData(companyName) {
-  const res = await fetch("https://faf7517edc8e.ngrok-free.app/company-data", {
+  const res = await fetch("https://analyzerapi-2.onrender.com/company-data", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ company_name: companyName })
