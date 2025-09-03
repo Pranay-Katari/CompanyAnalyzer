@@ -36,6 +36,10 @@ export default function Home() {
           Gain insights into market sentiment, company trends, and sector
           performance. A powerful tool for data-driven investors and analysts.
         </p>
+        <p className="mt-6 text-sm text-gray-500 italic">
+          Disclaimer: Data availability may vary depending on market hours, API limits, 
+          or server activity. Data availability is best around/after noon. Check the Github.
+        </p>
         <div className="mt-10">
           <Link
             href="/analyzer"
@@ -43,10 +47,14 @@ export default function Home() {
           >
             Get Started
           </Link>
+          <Link
+            href="/gallery"
+            className="inline-block px-10 py-4 text-lg font-semibold rounded-2xl shadow-md bg-gray-800 text-white hover:bg-gray-900 transition"
+          >
+            View Gallery
+          </Link>
         </div>
       </div>
-
-      {/* 🔹 Footer */}
       <footer className="absolute bottom-6 text-gray-500 text-sm">
         {new Date().getFullYear()} Open Source by Pranay Katari.
       </footer>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import {
   LineChart,
   Line,
@@ -275,6 +276,8 @@ export default function CompanyPage() {
           <h1 className="absolute top-4 left-1/2 -translate-x-1/2 text-2xl md:text-3xl font-bold text-white drop-shadow">
         S&amp;P 500 — Company Analysis
       </h1>
+      <Link href="/" className="inline-block px-10 py-4 text-lg font-semibold rounded-2xl shadow-md bg-gray-800 text-white hover:bg-gray-900 transition">Home</Link>
+
 
       <div className="pt-20" />
 
