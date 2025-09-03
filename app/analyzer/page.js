@@ -261,7 +261,7 @@ export default function CompanyPage() {
     const pad = Math.max((hi - lo) * 0.08, 1);
     return [lo - pad, hi + pad];
   }, [chartData]);
-
+ 
   const lastForecast = chartData.filter(d => d.forecastClose != null).at(-1)?.forecastClose ?? null;
 
 
