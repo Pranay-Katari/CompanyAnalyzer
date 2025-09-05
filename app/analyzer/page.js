@@ -325,7 +325,7 @@ export default function CompanyPage() {
           <div className="mt-4 rounded-2xl bg-black/90 p-5 shadow border">
             <h2 className="text-lg font-semibold mb-3">News Analytics</h2>
 
-            {loading && <p className="text-white text-neutral-700">Loading (Results may take up to 10 seconds)…</p>}
+            {loading && <p className="text-white text-neutral-700">Loading…</p>}
             {err && (
               <p className="rounded-md bg-red-100 px-3 py-2 text-sm text-red-800">{err}</p>
             )}
