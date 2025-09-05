@@ -128,14 +128,25 @@ const pageGradientFrom = (colors) => {
   };
 };
 
-const sentimentClass = (x) =>
-  typeof x !== "number" || Number.isNaN(x)
-    ? "bg-gray-200 text-gray-800"
-    : x > 0.33
-    ? "bg-green-100 text-green-800"
-    : x < -0.33
-    ? "bg-red-100 text-red-800"
-    : "bg-amber-100 text-amber-900";
+const sentimentLabel = (score) => {
+  if (typeof score !== "number" || Number.isNaN(score)) return "—";
+  if (score > 0.18) return "Positive";
+  if (score >= -0.05 && score <= 0.18) return "Neutral";
+  return "Negative";
+};
+
+const sentimentClass = (score) => {
+  if (typeof score !== "number" || Number.isNaN(score)) {
+    return "bg-gray-200 text-gray-800"; 
+  }
+  if (score > 0.18) {
+    return "bg-green-100 text-green-800"; 
+  }
+  if (score >= -0.05 && score <= 0.18) {
+    return "bg-yellow-100 text-yellow-800"; 
+  }
+  return "bg-red-100 text-red-800"; 
+};
 
 const fmtDate = (d) => {
   if (!d) return "Unknown date";
@@ -335,9 +346,7 @@ export default function CompanyPage() {
                 <div className="flex items-center gap-2 mb-3">
                   <span className="text-sm">Overall Sentiment</span>
                   <span className={`rounded-full px-2 py-1 text-sm ${sentimentClass(data.overall_sentiment)}`}>
-                    {typeof data.overall_sentiment === "number"
-                      ? data.overall_sentiment.toFixed(2)
-                      : "—"}
+                    {sentimentLabel(data.overall_sentiment)}
                   </span>
                 </div>
               </>
