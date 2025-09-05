@@ -30,7 +30,7 @@ export default function Gallery() {
       </div>
 
       <footer className="absolute bottom-6 text-gray-500 text-sm">
-        {new Date().getFullYear()} Source by Pranay Katari.
+        {new Date().getFullYear()} Open Source.
       </footer>
     </main>
   );

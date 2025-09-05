@@ -56,7 +56,7 @@ export default function Home() {
         </div>
       </div>
       <footer className="absolute bottom-6 text-gray-500 text-sm">
-        {new Date().getFullYear()} Open Source by Pranay Katari.
+        {new Date().getFullYear()} Open Source.
       </footer>
     </main>
   );
